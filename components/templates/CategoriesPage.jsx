@@ -2,25 +2,20 @@
 
 import { useState } from "react";
 import styles from "./CategoriesPage.module.css";
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation";
 
 function CategoriesPage() {
-
   const router = useRouter();
-
-  const [query, setQuery] = useState({difficulty: "", time: ""});
+  const [query, setQuery] = useState({ difficulty: "", time: "" });
 
   const changeHandler = (e) => {
     setQuery({ ...query, [e.target.name]: e.target.value });
   };
 
   const searchHandler = () => {
-    console.log(query)
-    router.push({
-      pathname: "/categories",
-      query,
-    });
-  }
+    const queryParams = new URLSearchParams(query).toString();
+    router.push(`/categories?${queryParams}`);
+  };
 
   return (
     <div className={styles.container}>
