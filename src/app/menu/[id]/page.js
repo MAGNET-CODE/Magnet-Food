@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import DetailsPage from '../../../../components/templates/DetailsPage';
 import React from 'react';
 
-// تابع برای واکشی داده‌ها
 async function getData() {
   const res = await fetch('http://localhost:4000/data');
   if (!res.ok) {
@@ -11,7 +10,6 @@ async function getData() {
   return res.json();
 }
 
-// تابع برای تولید مسیرهای دینامیک
 export async function generateStaticParams() {
   const data = await getData();
   const paths = data.slice(0, 10).map((food) => ({
@@ -20,7 +18,6 @@ export async function generateStaticParams() {
   return paths;
 }
 
-// کامپوننت جزئیات
 const Details = async ({ params }) => {
   const data = await getData();
   const food = data.find((item) => item.id.toString() === params.id);
