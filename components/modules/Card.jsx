@@ -2,13 +2,19 @@ import Link from "next/link";
 import styles from "./Card.module.css";
 import Location from "../icons/Location";
 import Dollar from "../icons/Dollar";
+import Image from "next/image";
 
-function Card(props) {
-  const { id, name, price, details, discount } = props;
+function Card(data) {
+  const { id, name, price, details, discount } = data;
 
   return (
     <div className={styles.container}>
-      <img src={`/images/${id}.jpeg`} alt={name} />
+      <Image 
+        width={100}
+        height={100}
+        src={`/images/${id}.jpeg`} 
+        alt={name} 
+      />
       <div className={styles.details}>
         <h4>{name}</h4>
         <div>
