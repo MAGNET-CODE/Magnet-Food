@@ -1,8 +1,9 @@
+import HomePage from "../../components/templates/HomePage";
 
 export default function Home() {
   return (
     <main>
-      <p>magnet-food</p>
+      <HomePage />
     </main>
   );
 }
