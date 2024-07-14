@@ -4,7 +4,7 @@ import MenuPage from "../../../components/templates/MenuPage";
 import React from 'react';
 
 async function getData() {
-  const res = await fetch('http://localhost:4000/data', { next: { revalidate: 60 * 60 } });
+  const res = await fetch( `${process.env.BASE_URL}data`, { next: { revalidate: 60 * 60 } });
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -13,7 +13,6 @@ async function getData() {
 
 export default async function Menu() {
   const data = await getData();
-
   return (
     <MenuPage data={data} />
   );

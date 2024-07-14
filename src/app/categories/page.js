@@ -10,8 +10,9 @@ function Categories({ searchParams }) {
     async function fetchData() {
       const { difficulty, time } = searchParams;
 
-      const res = await fetch("http://localhost:4000/data");
+      const res = await fetch("https://api-magnet-food.vercel.app/data");
       const data = await res.json();
+
 
       const filteredData = data.filter((item) => {
         const difficultyResult = item.details.filter(
