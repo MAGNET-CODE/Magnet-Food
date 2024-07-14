@@ -43,6 +43,11 @@
 .cards img {
   margin: auto;
 }
+
+.imgSearch {
+  width: 40%;
+  height: 40%;
+}
 @media (max-width: 900px) {
   .container {
     padding: 20px;
