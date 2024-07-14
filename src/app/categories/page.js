@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import CategoriesPage from "../../../components/templates/CategoriesPage"
 
 function Categories({ searchParams }) {
@@ -10,9 +10,8 @@ function Categories({ searchParams }) {
     async function fetchData() {
       const { difficulty, time } = searchParams;
 
-      const res = await fetch("https://api-magnet-food.vercel.app/data");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}data`);
       const data = await res.json();
-
 
       const filteredData = data.filter((item) => {
         const difficultyResult = item.details.filter(
@@ -23,13 +22,13 @@ function Categories({ searchParams }) {
           const cookingTime = detail["Cooking Time"] || "";
           const [timeDetail] = cookingTime.split(" ");
 
-          if(time === "less" && timeDetail && +timeDetail <= 30) {
+          if (time === "less" && timeDetail && +timeDetail <= 30) {
             return detail;
-          } else if(time === "more" && timeDetail && +timeDetail > 30) {
+          } else if (time === "more" && timeDetail && +timeDetail > 30) {
             return detail;
           }
         });
-        if(time && difficulty && timeResult.length && difficultyResult.length) {
+        if (time && difficulty && timeResult.length && difficultyResult.length) {
           return item;
         } else if (!time && difficulty && difficultyResult.length) {
           return item;
@@ -45,8 +44,10 @@ function Categories({ searchParams }) {
   }, [searchParams]);
 
   return (
-    <CategoriesPage data={data} />
-  )
+    <Suspense fallback={<div>Loading...</div>}>
+      <CategoriesPage data={data} />
+    </Suspense>
+  );
 }
 
-export default Categories
+export default Categories;

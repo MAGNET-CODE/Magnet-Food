@@ -3,7 +3,7 @@ import DetailsPage from '../../../../components/templates/DetailsPage';
 import React from 'react';
 
 async function getData() {
-  const res = await fetch(`${process.env.BASE_URL}data`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}data`);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
@@ -25,7 +25,6 @@ const Details = async ({ params }) => {
   if (!food) {
     notFound();
   }
-
   return <DetailsPage {...food} />;
 };
 
